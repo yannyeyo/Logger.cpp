@@ -1,0 +1,22 @@
+# Система сборки
+/bin/
+/obj/
+/build/
+/CMakeFiles/
+*.o
+*.a
+*.so
+*.exe
+*.dll
+
+# Файлы среды разработки
+*.idea/
+.vscode/
+*.vs/
+.DS_Store
+Thumbs.db
+
+# Прочие временные файлы
+*~
+*.log
+*.tmp
