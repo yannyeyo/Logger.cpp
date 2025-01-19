@@ -8,7 +8,7 @@
 #include <ctime>
 #include <cstring>
 
-// Перечисление для уровней логирования
+// ГЏГҐГ°ГҐГ·ГЁГ±Г«ГҐГ­ГЁГҐ Г¤Г«Гї ГіГ°Г®ГўГ­ГҐГ© Г«Г®ГЈГЁГ°Г®ГўГ Г­ГЁГї
 enum class LogLevel {
     INFO,
     WARNING,
@@ -16,26 +16,26 @@ enum class LogLevel {
     EMPTY
 };
 
-// Класс Logger для записи сообщений в файл
+// ГЉГ«Г Г±Г± Logger Г¤Г«Гї Г§Г ГЇГЁГ±ГЁ Г±Г®Г®ГЎГ№ГҐГ­ГЁГ© Гў ГґГ Г©Г«
 class Logger {
 private:
-    std::ofstream logFile;  // Файловый поток для записи в файл
-    LogLevel defaultLevel;  // Уровень логирования по умолчанию
-    std::mutex mtx;         // Мьютекс для обеспечения потокобезопасности
+    std::ofstream logFile;
+    LogLevel defaultLevel;
+    std::mutex mtx;  
 
 public:
-    // Конструктор принимает имя файла и уровень логирования по умолчанию
+    // ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ°ГЁГ­ГЁГ¬Г ГҐГІ ГЁГ¬Гї ГґГ Г©Г«Г  ГЁ ГіГ°Г®ГўГҐГ­Гј Г«Г®ГЈГЁГ°Г®ГўГ Г­ГЁГї ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
     Logger(const std::string& filename, LogLevel defaultLevel = LogLevel::INFO);
 
-    // Деструктор закрывает файл
+    // Г„ГҐГ±ГІГ°ГіГЄГІГ®Г° Г§Г ГЄГ°Г»ГўГ ГҐГІ ГґГ Г©Г«
     ~Logger();
 
-    // Метод для записи сообщения в лог
+    // ГЊГҐГІГ®Г¤ Г¤Г«Гї Г§Г ГЇГЁГ±ГЁ Г±Г®Г®ГЎГ№ГҐГ­ГЁГї Гў Г«Г®ГЈ
     void log(const std::string& message, LogLevel level = LogLevel::INFO);
 
 private:
-    // Метод для преобразования уровня логирования в строку
+    // ГЊГҐГІГ®Г¤ Г¤Г«Гї ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГї ГіГ°Г®ГўГ­Гї Г«Г®ГЈГЁГ°Г®ГўГ Г­ГЁГї Гў Г±ГІГ°Г®ГЄГі
     std::string logLevelToString(LogLevel level);
 };
 
-#endif // LOGGER_H
+#endif
