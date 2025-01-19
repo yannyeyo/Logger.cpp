@@ -8,7 +8,7 @@
 #include <ctime>
 #include <cstring>
 
-// Ïåðå÷èñëåíèå äëÿ óðîâíåé ëîãèðîâàíèÿ
+// Перечисление для уровней логирования
 enum class LogLevel {
     INFO,
     WARNING,
@@ -16,25 +16,25 @@ enum class LogLevel {
     EMPTY
 };
 
-// Êëàññ Logger äëÿ çàïèñè ñîîáùåíèé â ôàéë
+// Класс Logger для записи сообщений в файл
 class Logger {
 private:
     std::ofstream logFile;
     LogLevel defaultLevel;
-    std::mutex mtx;  
+    std::mutex mtx;       
 
 public:
-    // Êîíñòðóêòîð ïðèíèìàåò èìÿ ôàéëà è óðîâåíü ëîãèðîâàíèÿ ïî óìîë÷àíèþ
+    // Конструктор принимает имя файла и уровень логирования по умолчанию
     Logger(const std::string& filename, LogLevel defaultLevel = LogLevel::INFO);
 
-    // Äåñòðóêòîð çàêðûâàåò ôàéë
+    // Деструктор закрывает файл
     ~Logger();
 
-    // Ìåòîä äëÿ çàïèñè ñîîáùåíèÿ â ëîã
+    // Метод для записи сообщения в лог
     void log(const std::string& message, LogLevel level = LogLevel::INFO);
 
 private:
-    // Ìåòîä äëÿ ïðåîáðàçîâàíèÿ óðîâíÿ ëîãèðîâàíèÿ â ñòðîêó
+    // Метод для преобразования уровня логирования в строку
     std::string logLevelToString(LogLevel level);
 };
 
