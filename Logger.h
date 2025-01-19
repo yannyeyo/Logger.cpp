@@ -12,7 +12,8 @@
 enum class LogLevel {
     INFO,
     WARNING,
-    ERROR
+    ERROR,
+    EMPTY
 };
 
 // Класс Logger для записи сообщений в файл

@@ -70,6 +70,9 @@ again:
             else if (levelStr == "ERROR") {
                 level = LogLevel::ERROR;
             }
+            else if (levelStr == "") {
+                level = LogLevel::EMPTY;
+            }
             else if (levelStr != "INFO") {
                 std::cout << "Incorrect text, try again!\n";
                 goto again_2;
