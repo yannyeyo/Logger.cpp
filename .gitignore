@@ -1,13 +1,16 @@
 # Система сборки
 /bin/
-/obj/
-/build/
-/CMakeFiles/
+.obj/
+.build/
 *.o
 *.a
 *.so
 *.exe
 *.dll
+*.pdb
+*.idb
+*.ilk
+*.log
 
 # Файлы среды разработки
 *.idea/
@@ -15,6 +18,14 @@
 *.vs/
 .DS_Store
 Thumbs.db
+
+# Visual Studio
+.vs/
+.vscode/
+*.vcxproj.user
+*.vcxproj.filters
+*.sln
+*.user
 
 # Прочие временные файлы
 *~
