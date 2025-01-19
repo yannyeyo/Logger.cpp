@@ -1,37 +1,37 @@
 #include "Logger.h"
 #include <iostream>
 
-// Конструктор открывает файл для записи и проверяет успешность открытия
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕС‚РєСЂС‹РІР°РµС‚ С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё Рё РїСЂРѕРІРµСЂСЏРµС‚ СѓСЃРїРµС€РЅРѕСЃС‚СЊ РѕС‚РєСЂС‹С‚РёСЏ
 Logger::Logger(const std::string& filename, LogLevel defaultLevel)
     : defaultLevel(defaultLevel) {
     logFile.open(filename, std::ios::app);
     if (!logFile.is_open()) {
         std::cerr << "Unable to open log file!" << std::endl;
-        exit(1);  // Завершает программу при ошибке открытия файла
+        exit(1);  // Р—Р°РІРµСЂС€Р°РµС‚ РїСЂРѕРіСЂР°РјРјСѓ РїСЂРё РѕС€РёР±РєРµ РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°
     }
 }
 
-// Деструктор закрывает файл, если он открыт
+// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ Р·Р°РєСЂС‹РІР°РµС‚ С„Р°Р№Р», РµСЃР»Рё РѕРЅ РѕС‚РєСЂС‹С‚
 Logger::~Logger() {
     if (logFile.is_open()) {
         logFile.close();
     }
 }
 
-// Метод для записи сообщения в файл
+// РњРµС‚РѕРґ РґР»СЏ Р·Р°РїРёСЃРё СЃРѕРѕР±С‰РµРЅРёСЏ РІ С„Р°Р№Р»
 void Logger::log(const std::string& message, LogLevel level) {
-    std::lock_guard<std::mutex> lock(mtx);  // Обеспечение потокобезопасности
+    std::lock_guard<std::mutex> lock(mtx);  // РћР±РµСЃРїРµС‡РµРЅРёРµ РїРѕС‚РѕРєРѕР±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
     if (level >= defaultLevel) {
-        auto now = std::chrono::system_clock::now();  // Получаем текущее время
+        auto now = std::chrono::system_clock::now();  // РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РµРµ РІСЂРµРјСЏ
         std::time_t time = std::chrono::system_clock::to_time_t(now);
         char timeBuffer[26];
-        ctime_s(timeBuffer, sizeof(timeBuffer), &time);  // Форматируем время в строку
+        ctime_s(timeBuffer, sizeof(timeBuffer), &time);  // Р¤РѕСЂРјР°С‚РёСЂСѓРµРј РІСЂРµРјСЏ РІ СЃС‚СЂРѕРєСѓ
         timeBuffer[std::strlen(timeBuffer) - 1] = '\0';
         logFile << "[" << timeBuffer << "]" << "[" << logLevelToString(level) << "] " << message << std::endl;
     }
 }
 
-// Преобразование уровня логирования в строку для записи в файл
+// РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СѓСЂРѕРІРЅСЏ Р»РѕРіРёСЂРѕРІР°РЅРёСЏ РІ СЃС‚СЂРѕРєСѓ РґР»СЏ Р·Р°РїРёСЃРё РІ С„Р°Р№Р»
 std::string Logger::logLevelToString(LogLevel level) {
     switch (level) {
     case LogLevel::INFO: return "INFO";
